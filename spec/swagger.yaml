@@ -129,20 +129,20 @@ paths:
         - name: maxResults
           in: query
           description: Maximalt antal resultat som önskas. 9 är default, max är 1000.
-          default: 9
+          required: false
           type: integer
           format: int32
         - name: radius
           in: query
           description: Radie i meter för det cirkulära området kring koordinaten som närliggande hållplatser skall hämtas ut för. 1000 m är defaultvärde, max är 2000 m.
-          default: 1000
+          required: false
           type: integer
           format: int32
         - name: lang
           in: query
           description: Språk (sv/en), default sv. Påverkar språket i felmeddelanden.
+          required: false
           type: string
-          default: sv
           enum:
           - sv
           - en
@@ -173,13 +173,11 @@ paths:
           in: query
           description: Om ”True” returneras endast hållplatser. True = default.
           required: false
-          default: true
           type: boolean
         - name: maxResults
           in: query
           description: Maximalt antal resultat som önskas. 10 är default, det går inte att få mer än 50.
           required: false
-          default: 10
           type: integer
           format: int32
       tags:
@@ -222,31 +220,26 @@ paths:
           in: query
           description: Default = true. Om false, så exkluderas trafikslaget från svaret.
           required: false
-          default: true
           type: boolean
         - name: metro
           in: query
           description: Default = true. Om false, så exkluderas trafikslaget från svaret.
           required: false
-          default: true
           type: boolean
         - name: train
           in: query
           description: Default = true. Om false, så exkluderas trafikslaget från svaret.
           required: false
-          default: true
           type: boolean
         - name: tram
           in: query
           description: Default = true. Om false, så exkluderas trafikslaget från svaret.
           required: false
-          default: true
           type: boolean
         - name: ship
           in: query
           description: Default = true. Om false, så exkluderas trafikslaget från svaret.
           required: false
-          default: true
           type: boolean
       tags:
         - Realtidsinformation
