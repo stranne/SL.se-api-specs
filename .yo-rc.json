@@ -1,0 +1,10 @@
+{
+  "generator-openapi-repo": {
+    "importExistingSpec": false,
+    "name": "SL.se",
+    "repo": "stranne/SL.se-api-specs",
+    "splitSpec": false,
+    "samples": true,
+    "installSwaggerUI": true
+  }
+}
