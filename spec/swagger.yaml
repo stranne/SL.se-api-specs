@@ -18,7 +18,7 @@ produces:
 paths:
   /LineData.json?model=site:
     get:
-      summary: Hallplatser och Linjer 2 - Site
+      summary: Hållplatser och Linjer 2 - Site
       description: |
         För att kunna beskriva trafikinformation på ett konsekvent sätt, är det nödvändigt att ingående begrepp och definitioner är klara och tydliga. De viktigaste begreppen för denna tjänst presenteras nedan.
       parameters:
@@ -28,7 +28,7 @@ paths:
           required: true
           type: string
       tags:
-        - Hållplatser och Linjer
+        - Hallplatser och Linjer
       responses:
         200:
           description: Response
@@ -36,7 +36,7 @@ paths:
             $ref: '#/definitions/HallplatserOchLinjerSiteResponse'
   /LineData.json?model=stop:
     get:
-      summary: Hallplatser och Linjer 2 - Stop Point
+      summary: Hållplatser och Linjer 2 - Stop Point
       description: |
         För att kunna beskriva trafikinformation på ett konsekvent sätt, är det nödvändigt att ingående begrepp och definitioner är klara och tydliga. De viktigaste begreppen för denna tjänst presenteras nedan.
       parameters:
@@ -54,7 +54,7 @@ paths:
             $ref: '#/definitions/HallplatserOchLinjerStopPointResponse'
   /LineData.json?model=line:
     get:
-      summary: Hallplatser och Linjer 2 - Line
+      summary: Hållplatser och Linjer 2 - Line
       description: |
         För att kunna beskriva trafikinformation på ett konsekvent sätt, är det nödvändigt att ingående begrepp och definitioner är klara och tydliga. De viktigaste begreppen för denna tjänst presenteras nedan.
       parameters:
@@ -64,7 +64,7 @@ paths:
           required: true
           type: string
       tags:
-        - Hållplatser och Linjer
+        - Hallplatser och Linjer
       responses:
         200:
           description: Response
@@ -72,7 +72,7 @@ paths:
             $ref: '#/definitions/HallplatserOchLinjerLineResponse'
   /LineData.json?model=jour:
     get:
-      summary: Hallplatser och Linjer 2 - Journey Pattern Point On Line
+      summary: Hållplatser och Linjer 2 - Journey Pattern Point On Line
       description: |
         För att kunna beskriva trafikinformation på ett konsekvent sätt, är det nödvändigt att ingående begrepp och definitioner är klara och tydliga. De viktigaste begreppen för denna tjänst presenteras nedan.
       parameters:
@@ -82,7 +82,7 @@ paths:
           required: true
           type: string
       tags:
-        - Hållplatser och Linjer
+        - Hallplatser och Linjer
       responses:
         200:
           description: Response
@@ -90,7 +90,7 @@ paths:
             $ref: '#/definitions/HallplatserOchLinjerJourneyPatternPointOnLineResponse'
   /LineData.json?model=tran:
     get:
-      summary: Hallplatser och Linjer 2 - Transport Mode
+      summary: Hållplatser och Linjer 2 - Transport Mode
       description: |
         För att kunna beskriva trafikinformation på ett konsekvent sätt, är det nödvändigt att ingående begrepp och definitioner är klara och tydliga. De viktigaste begreppen för denna tjänst presenteras nedan.
       parameters:
@@ -100,7 +100,7 @@ paths:
           required: true
           type: string
       tags:
-        - Hållplatser och Linjer
+        - Hallplatser och Linjer
       responses:
         200:
           description: Response
@@ -108,7 +108,7 @@ paths:
             $ref: '#/definitions/HallplatserOchLinjerTransportModeResponse'
   /nearbystops.json:
     get:
-      summary: Narliggande hallplatser
+      summary: Närliggande hållplatser
       description: Närliggande hållplatser
       parameters:
         - name: key
@@ -147,7 +147,7 @@ paths:
           - sv
           - en
       tags:
-        - Närliggande hållplatser
+        - Narliggande hallplatser
       responses:
         200:
           description: Response
@@ -250,7 +250,7 @@ paths:
             $ref: '#/definitions/RealtidsinformationResponse'
   /deviations.json:
     get:
-      summary: Storningsinformation 2
+      summary: Störningsinformation 2
       description: |
         Med detta API kan du få fram information om aktuella och planerade störningar i SL-trafiken. Med API ‘et kan du ställa frågor om störningar på till exempel en viss linje eller ett visst trafikslag. Svaret består av störningsmeddelanden med viss metainformation.
 
@@ -298,7 +298,7 @@ paths:
           type: string
           format: date
       tags:
-        - Störningsinformation
+        - Storningsinformation
       responses:
         200:
           description: Response
@@ -306,7 +306,7 @@ paths:
             $ref: '#/definitions/StorningsinformationResponse'
   /deviationsrawdata.json:
     get:
-      summary: Storningsinformation 2 Raw
+      summary: Störningsinformation 2 Raw
       description: |
         Med detta API kan du få fram information om aktuella och planerade störningar i SL-trafiken. Med API ‘et kan du ställa frågor om störningar på till exempel en viss linje eller ett visst trafikslag. Svaret består av störningsmeddelanden med viss metainformation.
 
@@ -342,7 +342,7 @@ paths:
           type: integer
           format: int32
       tags:
-        - Störningsinformation
+        - Storningsinformation
       responses:
         200:
           description: Response
@@ -350,7 +350,7 @@ paths:
             $ref: '#/definitions/StorningsinformationRawResponse'
   /trafficsituation.json:
     get:
-      summary: Trafiklaget 2
+      summary: Trafikläget 2
       description: |
         Med detta API kan du få information om den aktuella statusen för SLs trafikläge. Detta är information på en övergripande nivå om aktuell status för respektive trafikslag. Den information som ligger till grund för detta API hittar du på startsidan av sl.se under rubriken "Trafikläget kl. xx:xx".
 
@@ -369,7 +369,7 @@ paths:
           required: true
           type: string
       tags:
-        - Trafikläget
+        - Trafiklaget
       responses:
         200:
           description: Response
