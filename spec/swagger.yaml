@@ -392,7 +392,6 @@ definitions:
         description: Innehåller statuskod för det eventuella meddelandet.
       message:
         type: string
-        example: null
         description: Innehåller eventuellt anropsrelaterade meddelanden som t.ex. felmeddelanden. Se ”Felmeddelanden” nedan.
       executionTime:
         type: number
@@ -461,7 +460,6 @@ definitions:
         description: Innehåller statuskod för det eventuella meddelandet.
       message:
         type: string
-        example: null
         description: Innehåller eventuellt anropsrelaterade meddelanden som t.ex. felmeddelanden. Se ”Felmeddelanden” nedan.
       executionTime:
         type: number
@@ -561,7 +559,6 @@ definitions:
         description: Innehåller statuskod för det eventuella meddelandet.
       message:
         type: string
-        example: null
         description: Innehåller eventuellt anropsrelaterade meddelanden som t.ex. felmeddelanden. Se ”Felmeddelanden” nedan.
       executionTime:
         type: number
@@ -630,7 +627,6 @@ definitions:
         description: Innehåller statuskod för det eventuella meddelandet.
       message:
         type: string
-        example: null
         description: Innehåller eventuellt anropsrelaterade meddelanden som t.ex. felmeddelanden. Se ”Felmeddelanden” nedan.
       executionTime:
         type: number
@@ -699,7 +695,6 @@ definitions:
         description: Innehåller statuskod för det eventuella meddelandet.
       message:
         type: string
-        example: null
         description: Innehåller eventuellt anropsrelaterade meddelanden som t.ex. felmeddelanden. Se ”Felmeddelanden” nedan.
       executionTime:
         type: number
@@ -828,7 +823,6 @@ definitions:
         description: Innehåller statuskod för det eventuella meddelandet.
       message:
         type: string
-        example: null
         description: Innehåller eventuellt anropsrelaterade meddelanden som t.ex. felmeddelanden. Se ”Felmeddelanden” nedan.
       executionTime:
         type: number
@@ -878,7 +872,6 @@ definitions:
         description: Innehåller statuskod för det eventuella meddelandet.
       message:
         type: string
-        example: null
         description: Innehåller eventuellt anropsrelaterade meddelanden som t.ex. felmeddelanden. Se ”Felmeddelanden” nedan.
       executionTime:
         type: number
@@ -992,7 +985,6 @@ definitions:
           Tunnelbana före övergång; 0
       stopPointDesignation:
         type: string
-        example: null
         description: Ytterligare identifierare för stoppställe, t.ex. bokstav för busskur eller spår för pendeltåg.
       timeTabledDateTime:
         type: string
@@ -1035,7 +1027,6 @@ definitions:
           Tunnelbana före övergång; Saknas.
       secondaryDestinationName:
         type: string
-        example: null
         description: |
           Finns bara för:Pendeltåg.
 
@@ -1098,7 +1089,6 @@ definitions:
         description: Innehåller statuskod för det eventuella meddelandet.
       message:
         type: string
-        example: null
         description: Innehåller eventuellt anropsrelaterade meddelanden som t.ex. felmeddelanden. Se ”Felmeddelanden” nedan.
       executionTime:
         type: number
@@ -1177,7 +1167,6 @@ definitions:
         description: Innehåller statuskod för det eventuella meddelandet.
       message:
         type: string
-        example: null
         description: Innehåller eventuellt anropsrelaterade meddelanden som t.ex. felmeddelanden. Se ”Felmeddelanden” nedan.
       executionTime:
         type: number
@@ -1279,7 +1268,6 @@ definitions:
         description: Innehåller statuskod för det eventuella meddelandet.
       message:
         type: string
-        example: null
         description: Innehåller eventuellt anropsrelaterade meddelanden som t.ex. felmeddelanden. Se ”Felmeddelanden” nedan.
       executionTime:
         type: number
@@ -1381,7 +1369,6 @@ definitions:
         description: Namn på den bana som händelsen påverkar. Kan saknas, om händelsen påverkar hela trafikslaget eller banor inte finns (typ bussar).
       eventInfoUrl:
         type: string
-        example: null
         description: Länk till storningsinformation.sl.se, eller till specifik sida med information om händelsen.
   TrafiklagetLineNumber:
     type: object
