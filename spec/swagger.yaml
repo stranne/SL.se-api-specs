@@ -1672,7 +1672,7 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/ReseplanerareTripJourneyDetailRTUMessage'
-      RTUMessages:
+      geometryRef:
         $ref: '#/definitions/ReseplanerareTripJourneyGeometryRef'
   ReseplanerareTripJourneyDetailStop:
     type: object
