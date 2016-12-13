@@ -7,13 +7,13 @@ This repository contains documentations with [Swagger specifications](https://gi
 
 Include documentations for the following APIs:
 
-- SL Hållplatser och Linjer 2
-- SL Närliggande hållplatser
-- SL Platsuppslag
-- SL Realtidsinformation 4
-- SL Reseplanerare 2
-- SL Störningsinformation 2
-- SL Trafikläget 2
+- [SL Hållplatser och Linjer 2](https://www.trafiklab.se/api/sl-hallplatser-och-linjer-2)
+- [SL Närliggande hållplatser](https://www.trafiklab.se/api/sl-narliggande-hallplatser)
+- [SL Platsuppslag](https://www.trafiklab.se/api/sl-platsuppslag)
+- [SL Realtidsinformation 4](https://www.trafiklab.se/api/sl-realtidsinformation-4)
+- [SL Reseplanerare 2](https://www.trafiklab.se/api/sl-reseplanerare-2)
+- [SL Störningsinformation 2](https://www.trafiklab.se/api/sl-storningsinformation-2)
+- [SL Trafikläget 2](https://www.trafiklab.se/api/sl-trafiklaget-2)
 
 ## Generate client
 
