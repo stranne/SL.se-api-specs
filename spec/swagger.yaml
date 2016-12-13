@@ -266,12 +266,6 @@ paths:
           description: Aktuella trafikslag. Tillåtna värden är bus, metro, train, ship och tram. Kommaseparerad sträng.
           required: false
           type: string
-          enum:
-          - bus
-          - metro
-          - train
-          - ship
-          - tram
         - name: lineNumber
           in: query
           description: Max 10 linjer. Kommaseparerad sträng.
@@ -322,12 +316,6 @@ paths:
           description: Aktuella trafikslag. Tillåtna värden är bus, metro, train, ship och tram. Kommaseparerad sträng.
           required: false
           type: string
-          enum:
-          - bus
-          - metro
-          - train
-          - ship
-          - tram
         - name: lineNumber
           in: query
           description: Max 10 linjer. Kommaseparerad sträng.
