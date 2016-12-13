@@ -1,0 +1,2515 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SL.se API",
+    "description": "Stockholms Lokaltrafik",
+    "version": "2.0.0"
+  },
+  "host": "api.sl.se",
+  "schemes": [
+    "https",
+    "http"
+  ],
+  "basePath": "/api2",
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/LineData.json?model=site": {
+      "get": {
+        "summary": "Hållplatser och Linjer 2 - Site",
+        "description": "För att kunna beskriva trafikinformation på ett konsekvent sätt, är det nödvändigt att ingående begrepp och definitioner är klara och tydliga. De viktigaste begreppen för denna tjänst presenteras nedan.\n",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "description": "Din API nyckel.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Hallplatser och Linjer"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "schema": {
+              "$ref": "#/definitions/HallplatserOchLinjerSiteResponse"
+            }
+          }
+        }
+      }
+    },
+    "/LineData.json?model=stop": {
+      "get": {
+        "summary": "Hållplatser och Linjer 2 - Stop Point",
+        "description": "För att kunna beskriva trafikinformation på ett konsekvent sätt, är det nödvändigt att ingående begrepp och definitioner är klara och tydliga. De viktigaste begreppen för denna tjänst presenteras nedan.\n",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "description": "Din API nyckel.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Hallplatser och Linjer"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "schema": {
+              "$ref": "#/definitions/HallplatserOchLinjerStopPointResponse"
+            }
+          }
+        }
+      }
+    },
+    "/LineData.json?model=line": {
+      "get": {
+        "summary": "Hållplatser och Linjer 2 - Line",
+        "description": "För att kunna beskriva trafikinformation på ett konsekvent sätt, är det nödvändigt att ingående begrepp och definitioner är klara och tydliga. De viktigaste begreppen för denna tjänst presenteras nedan.\n",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "description": "Din API nyckel.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Hallplatser och Linjer"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "schema": {
+              "$ref": "#/definitions/HallplatserOchLinjerLineResponse"
+            }
+          }
+        }
+      }
+    },
+    "/LineData.json?model=jour": {
+      "get": {
+        "summary": "Hållplatser och Linjer 2 - Journey Pattern Point On Line",
+        "description": "För att kunna beskriva trafikinformation på ett konsekvent sätt, är det nödvändigt att ingående begrepp och definitioner är klara och tydliga. De viktigaste begreppen för denna tjänst presenteras nedan.\n",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "description": "Din API nyckel.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Hallplatser och Linjer"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "schema": {
+              "$ref": "#/definitions/HallplatserOchLinjerJourneyPatternPointOnLineResponse"
+            }
+          }
+        }
+      }
+    },
+    "/LineData.json?model=tran": {
+      "get": {
+        "summary": "Hållplatser och Linjer 2 - Transport Mode",
+        "description": "För att kunna beskriva trafikinformation på ett konsekvent sätt, är det nödvändigt att ingående begrepp och definitioner är klara och tydliga. De viktigaste begreppen för denna tjänst presenteras nedan.\n",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "description": "Din API nyckel.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Hallplatser och Linjer"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "schema": {
+              "$ref": "#/definitions/HallplatserOchLinjerTransportModeResponse"
+            }
+          }
+        }
+      }
+    },
+    "/nearbystops.json": {
+      "get": {
+        "summary": "Närliggande hållplatser",
+        "description": "Närliggande hållplatser",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "description": "Din API nyckel.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originCoordLat",
+            "in": "query",
+            "description": "Lat (WGS, decimal degree), ex 59.293611",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originCoordLong",
+            "in": "query",
+            "description": "Long (WGS, decimal degree), ex 18.083056",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximalt antal resultat som önskas. 9 är default, max är 1000.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "description": "Radie i meter för det cirkulära området kring koordinaten som närliggande hållplatser skall hämtas ut för. 1000 m är defaultvärde, max är 2000 m.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "description": "Språk (sv/en), default sv. Påverkar språket i felmeddelanden.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "sv",
+              "en"
+            ]
+          }
+        ],
+        "tags": [
+          "Narliggande hallplatser"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "schema": {
+              "$ref": "#/definitions/NarliggandeHallplatserResponse"
+            }
+          }
+        }
+      }
+    },
+    "/typeahead.json": {
+      "get": {
+        "summary": "Platsuppslag",
+        "description": "Med detta API kan du få information om en plats genom att skicka in delar av platsens namn. Du kan välja mellan att bara söka efter hållplatsområden eller hållplatser, adresser och platser.\n",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "description": "Din API nyckel.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "searchString",
+            "in": "query",
+            "description": "Söksträngen.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stationsOnly",
+            "in": "query",
+            "description": "Om ”True” returneras endast hållplatser. True = default.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "maxResults",
+            "in": "query",
+            "description": "Maximalt antal resultat som önskas. 10 är default, det går inte att få mer än 50.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Platsuppslag"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "schema": {
+              "$ref": "#/definitions/PlatsuppslagResponse"
+            }
+          }
+        }
+      }
+    },
+    "/realtimedeparturesV4.json": {
+      "get": {
+        "summary": "Realtidsinformation 4",
+        "description": "Realtidsinformation gällande buss, tunnelbana, pendeltåg och lokalbana. Detta API innehåller liknande information som SL Realtidsinformation 3.\n\nVissa ändringar har gjorts i svarsstrukturen för att få den mer enhetlig mellan tunnelbaneavgångar och övriga trafikslag, samt att man har påbörjat hämtning av all tunnelbaneinformation från samma källa som övriga trafikslagsavgångar. Detta medför att man kommer att kunna få ut lika mycket information om en tunnelbaneavgång som för övriga.\n\nÖvergången till den nya trafikkällan för tunnelbaneavgångar sker i flera steg. De gröna och blå tunnelbanelinjerna har övergått till att hämta data på samma sätt som för övriga trafikslag. Röd linje återstår och det finns ännu ingen färdig tidplan för när övergången sker, men i dagsläget är en rimlig gissning att det kan ske under 2017.\n\nI dokumentationen nedan kommer svarselement som gäller för tunnelbana före övergång till nytt informationssystem noteras med Tunnelbana före övergång.\n",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "description": "En giltig API-nyckel.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteId",
+            "in": "query",
+            "description": "Unikt identifikationsnummer för den plats som aktuella avgångar skall hämtas för, t.ex. 9192 för Slussen. Detta id fås från tjänsten SL Platsuppslag.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "timeWindow",
+            "in": "query",
+            "description": "Hämta avgångar inom önskat tidsfönster. Där tidsfönstret är antalet minuter från och med nu. Max 60.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "bus",
+            "in": "query",
+            "description": "Default = true. Om false, så exkluderas trafikslaget från svaret.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "metro",
+            "in": "query",
+            "description": "Default = true. Om false, så exkluderas trafikslaget från svaret.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "train",
+            "in": "query",
+            "description": "Default = true. Om false, så exkluderas trafikslaget från svaret.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "tram",
+            "in": "query",
+            "description": "Default = true. Om false, så exkluderas trafikslaget från svaret.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "ship",
+            "in": "query",
+            "description": "Default = true. Om false, så exkluderas trafikslaget från svaret.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "Realtidsinformation"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "schema": {
+              "$ref": "#/definitions/RealtidsinformationResponse"
+            }
+          }
+        }
+      }
+    },
+    "/TravelplannerV2/trip.json": {
+      "get": {
+        "summary": "Reseplanerare 2 Trip",
+        "description": "Med detta API kan du få reseförslag från A till B inom Stockholms län med SLs trafik. I SLs reseplanerare finns även Waxholmsbolagets trafik. APIet kan användas för att beräkna reseförslag mellan valfri kombination av position och/eller stoppställe. APIet returnerar reseförslag från ”bästa matchning” av det som läggs in.\n\nReseplaneraren tar emot ISO-8859-1 encodad input. Förutom rätt encoding i anropet måste strängen även url encodas. Med ISO-8859-1 teckenencoding och url encoding av tecknen så blir t.ex. ä = %E4, å =%E5, ö = %f6 och mellanslag %20.\n\nI reseplaneraren finns det fyra olika funktioner som kan anropas\n\nTrip;\nRäknar ut en resa från en startpunkt till en destination. Dessa kan vara stations-id eller koordinater baserade på adresser eller ”intressepunkter.\n",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "description": "En giltig API-nyckel.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "description": "Språk i svar, default sv",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "sv",
+              "en"
+            ]
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Datum. Exempel 2014-08-23. date=2014-08-23. Default idag.",
+            "required": false,
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "name": "time",
+            "in": "query",
+            "description": "Tid. Exempel time=19:06. Default nu.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "searchForArrival",
+            "in": "query",
+            "description": "Som standard/default söker man efter tiden som man vill att resan skall avgå. Genom att sätta searchForArrival=1, så söker man istället resor baserat på tiden man vill komma fram. Default=0.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "numChg",
+            "in": "query",
+            "description": "Begränsa antalet byten. Default obegränsad",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "minChgTime",
+            "in": "query",
+            "description": "Minimum bytestid",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "originId",
+            "in": "query",
+            "description": "Kan antingen vara siteid eller ett alias, site eller akronym.\nExempel; 300109000, 9000, CST\n",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "originCoordLat",
+            "in": "query",
+            "description": "Ett trippel-id baserat på en koordinat och ett namn för utgångspunkten för resan. Detta kommer att hanteras som en adress i resultatet.\n\nExempel; originCoordLat=59.347754\n",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "originCoordLong",
+            "in": "query",
+            "description": "Ett trippel-id baserat på en koordinat och ett namn för utgångspunkten för resan. Detta kommer att hanteras som en adress i resultatet.\n\nExempel; originCoordLong=17.883724\n",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "originCoordName",
+            "in": "query",
+            "description": "Ett trippel-id baserat på en koordinat och ett namn för utgångspunkten för resan. Detta kommer att hanteras som en adress i resultatet.\n\nExempel; originCoordName=Blackebergsplan\n",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "destId",
+            "in": "query",
+            "description": "Kan antingen vara ett site-id, eller ett alias, site eller akronym.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "destCoordLat",
+            "in": "query",
+            "description": "Ett trippel-id baserat på en koordinat och ett namn för utgångspunkten för resan. Detta kommer att hanteras som en adress i resultatet.\n\nExempel; destCoordLat=59.347754\n",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "destCoordLong",
+            "in": "query",
+            "description": "Ett trippel-id baserat på en koordinat och ett namn för utgångspunkten för resan. Detta kommer att hanteras som en adress i resultatet.\n\nExempel; destCoordLong=17.883724\n",
+            "required": false,
+            "type": "number",
+            "format": "double"
+          },
+          {
+            "name": "destCoordName",
+            "in": "query",
+            "description": "Ett trippel-id baserat på en koordinat och ett namn för utgångspunkten för resan. Detta kommer att hanteras som en adress i resultatet.\n\nExempel; destCoordName=Blackebergsplan\n",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "viaId",
+            "in": "query",
+            "description": "d för via-stop (siteId). Exempel; 300109600, 9600",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "viaStopOver",
+            "in": "query",
+            "description": "Tid för via stop. Default=0 betyder att resan kommer att passera via-stoppet.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "unsharp",
+            "in": "query",
+            "description": "Med unsharp=1 kommer svaret innehålla resor från alternative stop-platser i närheten. Default=0",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "searchFirstLastTrip",
+            "in": "query",
+            "description": "Leta efter den första eller sista resan för dagen. Notera att det här gäller en tidtabellsdag som kan sträcka sig över midnatt.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "first",
+              "last"
+            ]
+          },
+          {
+            "name": "maxWalkDist",
+            "in": "query",
+            "description": "Max gångavstånd (meter) får gång till stop-platser.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "useTrain",
+            "in": "query",
+            "description": "Stäng av trafiktyper som är tillgängliga som default. (0/1) Exempel; useTrain=0.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "useMetro",
+            "in": "query",
+            "description": "Stäng av trafiktyper som är tillgängliga som default. (0/1) Exempel; useMetro=0.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "useTram",
+            "in": "query",
+            "description": "Stäng av trafiktyper som är tillgängliga som default. (0/1) Exempel; useTram=0.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "useBus",
+            "in": "query",
+            "description": "Stäng av trafiktyper som är tillgängliga som default. (0/1) Exempel; useBus=0.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "useFerry",
+            "in": "query",
+            "description": "Stäng av trafiktyper som är tillgängliga som default. (0/1) Exempel; useFerry=0.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "useShip",
+            "in": "query",
+            "description": "Stäng av trafiktyper som är tillgängliga som default. (0/1) Exempel; useShip=0.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "lineInc",
+            "in": "query",
+            "description": "Inkludera endast dessa linjer I sökning, suffixlinjer stöds inte. Exempel; lineInc=4,1,38",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "lineExc",
+            "in": "query",
+            "description": "Exkludera dessa linjer i sökningen. Suffixlinjer stöds inte. Exempel; lineExc=4,1,38",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "numTrips",
+            "in": "query",
+            "description": "Begränsa antalet returnerade resor. Notera att det här är ett ungefärligt tal. (1-6) Default=5",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "encoding",
+            "in": "query",
+            "description": "Default är ISO-8859-1. Encoding påverkar svaret och det man skickar in i originCoordName och destCoordName.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ISO-8859-1",
+              "UTF-8"
+            ]
+          },
+          {
+            "name": "realtime",
+            "in": "query",
+            "description": "Om det finns realtidsdata och flaggan realtime=true är satt så får man ut extra information i svaret. T.ex. för tider så är det rtTime och rtDate som läggs till. Default=false.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "Reseplanerare"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "schema": {
+              "$ref": "#/definitions/ReseplanerareTripResponse"
+            }
+          }
+        }
+      }
+    },
+    "/TravelplannerV2/journeydetail.json": {
+      "get": {
+        "summary": "Reseplanerare 2 Journey Detail",
+        "description": "Med detta API kan du få reseförslag från A till B inom Stockholms län med SLs trafik. I SLs reseplanerare finns även Waxholmsbolagets trafik. APIet kan användas för att beräkna reseförslag mellan valfri kombination av position och/eller stoppställe. APIet returnerar reseförslag från ”bästa matchning” av det som läggs in.\n\nReseplaneraren tar emot ISO-8859-1 encodad input. Förutom rätt encoding i anropet måste strängen även url encodas. Med ISO-8859-1 teckenencoding och url encoding av tecknen så blir t.ex. ä = %E4, å =%E5, ö = %f6 och mellanslag %20.\n\nI reseplaneraren finns det fyra olika funktioner som kan anropas\n\nJourneyDetail;\nReturnerar detaljerad information om en del av en resa med ett fordon.\nDen returnerar en lista på alla stop/stationer inklusive alla ankomst- och avgångstider med realtidsdata(om det finns tillgängligt).\n\nNOTE; due to lacking documentation this operation may not be mapped as expected\n",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "description": "En giltig API-nyckel.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ref",
+            "in": "query",
+            "description": "Referensparameter erhållen från tidigare trip-sökning",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "realtime",
+            "in": "query",
+            "description": "Om det finns realtidsdata och flaggan realtime=true är satt så får man ut extra information i svaret. Det som läggs till om det finns realtid är rtArrTime, rtArrDate, rtDepTime och rtDepTime. Default=false.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "tags": [
+          "Reseplanerare"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "schema": {
+              "$ref": "#/definitions/ReseplanerareTripJourneyDetailResponse"
+            }
+          }
+        }
+      }
+    },
+    "/TravelplannerV2/geometry.json": {
+      "get": {
+        "summary": "Reseplanerare 2 Geometry",
+        "description": "Med detta API kan du få reseförslag från A till B inom Stockholms län med SLs trafik. I SLs reseplanerare finns även Waxholmsbolagets trafik. APIet kan användas för att beräkna reseförslag mellan valfri kombination av position och/eller stoppställe. APIet returnerar reseförslag från ”bästa matchning” av det som läggs in.\n\nReseplaneraren tar emot ISO-8859-1 encodad input. Förutom rätt encoding i anropet måste strängen även url encodas. Med ISO-8859-1 teckenencoding och url encoding av tecknen så blir t.ex. ä = %E4, å =%E5, ö = %f6 och mellanslag %20.\n\nI reseplaneraren finns det fyra olika funktioner som kan anropas\n\nGeometry;\nReturnerar en linje med WGS84 koordinater som kan användas för att rita ut en resa på en karta.\n\nNOTE; due to lacking documentation this operation may not be mapped as expected\n",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "description": "En giltig API-nyckel.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ref",
+            "in": "query",
+            "description": "Referensparameter erhållen från tidigare trip-sökning",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Reseplanerare"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "schema": {
+              "$ref": "#/definitions/ReseplanerareTripGeometryResponse"
+            }
+          }
+        }
+      }
+    },
+    "/deviations.json": {
+      "get": {
+        "summary": "Störningsinformation 2",
+        "description": "Med detta API kan du få fram information om aktuella och planerade störningar i SL-trafiken. Med API ‘et kan du ställa frågor om störningar på till exempel en viss linje eller ett visst trafikslag. Svaret består av störningsmeddelanden med viss metainformation.\n\nFör att se informationen som returneras av detta API, se storningsinformation.sl.se.\n\nOm ingen av parametrarna ”TransportMode”, ”LineNumber” och ”SiteId” skickas med anropet skickas samtliga avvikelser tillbaks som svar.\n",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "description": "En giltig API-nyckel.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "transportMode",
+            "in": "query",
+            "description": "Aktuella trafikslag. Tillåtna värden är bus, metro, train, ship och tram. Kommaseparerad sträng.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "lineNumber",
+            "in": "query",
+            "description": "Max 10 linjer. Kommaseparerad sträng.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "siteId",
+            "in": "query",
+            "description": "Id för sökt hållplatsområde.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "fromDate",
+            "in": "query",
+            "description": "Startdatum för aktuell giltighetsperiod.",
+            "required": false,
+            "type": "string",
+            "format": "date"
+          },
+          {
+            "name": "toDate",
+            "in": "query",
+            "description": "Slutdatum för aktuell giltighetsperiod.",
+            "required": false,
+            "type": "string",
+            "format": "date"
+          }
+        ],
+        "tags": [
+          "Storningsinformation"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "schema": {
+              "$ref": "#/definitions/StorningsinformationResponse"
+            }
+          }
+        }
+      }
+    },
+    "/deviationsrawdata.json": {
+      "get": {
+        "summary": "Störningsinformation 2 Raw",
+        "description": "Med detta API kan du få fram information om aktuella och planerade störningar i SL-trafiken. Med API ‘et kan du ställa frågor om störningar på till exempel en viss linje eller ett visst trafikslag. Svaret består av störningsmeddelanden med viss metainformation.\n\nFör att se informationen som returneras av detta API, se storningsinformation.sl.se.\n\nOm ingen av parametrarna ”TransportMode”, ”LineNumber” och ”SiteId” skickas med anropet skickas samtliga avvikelser tillbaks som svar.\n",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "description": "En giltig API-nyckel.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "transportMode",
+            "in": "query",
+            "description": "Aktuella trafikslag. Tillåtna värden är bus, metro, train, ship och tram. Kommaseparerad sträng.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "lineNumber",
+            "in": "query",
+            "description": "Max 10 linjer. Kommaseparerad sträng.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "siteId",
+            "in": "query",
+            "description": "Id för sökt hållplatsområde.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "Storningsinformation"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "schema": {
+              "$ref": "#/definitions/StorningsinformationRawResponse"
+            }
+          }
+        }
+      }
+    },
+    "/trafficsituation.json": {
+      "get": {
+        "summary": "Trafikläget 2",
+        "description": "Med detta API kan du få information om den aktuella statusen för SLs trafikläge. Detta är information på en övergripande nivå om aktuell status för respektive trafikslag. Den information som ligger till grund för detta API hittar du på startsidan av sl.se under rubriken \"Trafikläget kl. xx:xx\".\n\nAPI ’et har endast en metod som returnerar en översiktlig bild över hur trafiksituationen ser ut just nu, med avseende på störningar som kan påverka resenärerna. Det som returneras är en lista med ett antal trafikslag, varje trafikslag har en sammanfattande status och ett antal (0 eller fler) händelser.\n\nDet finns 3 olika status som händelser kan ha;\n\n”Inga större störningar”\n”Stor påverkan”\n”Avstängt”\nEn händelse påverkar sitt trafikslag, så att trafikslagets sammanfattande status är lika med den sämsta statusen som finns ibland just nu aktiva händelser tillhörande trafikslaget. En händelse kan utöver statusen dessutom vara planerad (bool).\n",
+        "parameters": [
+          {
+            "name": "key",
+            "in": "query",
+            "description": "En giltig API-nyckel.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "Trafiklaget"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response",
+            "schema": {
+              "$ref": "#/definitions/TrafiklagetResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "HallplatserOchLinjerSiteResponse": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "Innehåller statuskod för det eventuella meddelandet."
+        },
+        "message": {
+          "type": "string",
+          "description": "Innehåller eventuellt anropsrelaterade meddelanden som t.ex. felmeddelanden. Se ”Felmeddelanden” nedan."
+        },
+        "executionTime": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "Anger hur lång tid (i ms) det tog för servern att generera svaret."
+        },
+        "responseData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HallplatserOchLinjerSiteResponseData"
+          }
+        }
+      }
+    },
+    "HallplatserOchLinjerSiteResponseData": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-11-18 00:18",
+          "description": "Senast ändrad. Uppdateras normalt sett bara en gång per dygn"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "site",
+            "stopPoint",
+            "line",
+            "journeyPatternPointOfLine",
+            "transportMode"
+          ],
+          "example": "site",
+          "description": "Anger typen av datamodellen som svaret innehåller; Site, StopPoint, Line, JourneyPatternPointOfLine, TransportMode"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HallplatserOchLinjerSite"
+          }
+        }
+      }
+    },
+    "HallplatserOchLinjerSite": {
+      "type": "object",
+      "properties": {
+        "siteId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1002,
+          "description": "Unikt identifikationsnummer för en Site"
+        },
+        "siteName": {
+          "type": "string",
+          "example": "Centralen",
+          "description": "Benämning på området"
+        },
+        "stopAreaNumber": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1051,
+          "description": "Unikt identifikationsnummer för hållplats"
+        },
+        "lastModifiedUtcDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2014-06-27T14:03:39.103Z",
+          "description": "Senast ändrad"
+        },
+        "existsFromDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2014-06-28T00:00:00.000Z",
+          "description": "Gäller fr.o.m. datum"
+        }
+      }
+    },
+    "HallplatserOchLinjerStopPointResponse": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "Innehåller statuskod för det eventuella meddelandet."
+        },
+        "message": {
+          "type": "string",
+          "description": "Innehåller eventuellt anropsrelaterade meddelanden som t.ex. felmeddelanden. Se ”Felmeddelanden” nedan."
+        },
+        "executionTime": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "Anger hur lång tid (i ms) det tog för servern att generera svaret."
+        },
+        "responseData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HallplatserOchLinjerStopPointResponseData"
+          }
+        }
+      }
+    },
+    "HallplatserOchLinjerStopPointResponseData": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-11-18 00:18",
+          "description": "Senast ändrad. Uppdateras normalt sett bara en gång per dygn"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "site",
+            "stopPoint",
+            "line",
+            "journeyPatternPointOfLine",
+            "transportMode"
+          ],
+          "example": "stopPoint",
+          "description": "Anger typen av datamodellen som svaret innehåller; Site, StopPoint, Line, JourneyPatternPointOfLine, TransportMode"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HallplatserOchLinjerStopPoint"
+          }
+        }
+      }
+    },
+    "HallplatserOchLinjerStopPoint": {
+      "type": "object",
+      "properties": {
+        "stopPointNumber": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1051,
+          "description": "Unikt identifikationsnummer för stoppställe"
+        },
+        "stopPointName": {
+          "type": "string",
+          "example": "T-Centralen",
+          "description": "Namn på stoppställe"
+        },
+        "stopAreaNumber": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1051,
+          "description": "Number för StopArea\n\nEtt stoppställe ingår endast i en StopArea\n"
+        },
+        "LocationNorthingCoordinate": {
+          "type": "number",
+          "format": "double",
+          "example": 59.3313179695028,
+          "description": "Koordinat i WGS84-format"
+        },
+        "LocationEastingCoordinate": {
+          "type": "number",
+          "format": "double",
+          "example": 18.0616773959365,
+          "description": "Koordinat i WGS84-format"
+        },
+        "ZoneShortName": {
+          "type": "string",
+          "example": "A",
+          "description": "Taxezon. A, B eller C\n\nOm SLs taxa inte gäller är taxezon null\n"
+        },
+        "StopAreaTypeCode": {
+          "type": "string",
+          "example": "METROSTN",
+          "enum": [
+            "BUSTERM",
+            "METROSTN",
+            "TRAMSTN",
+            "RAILWSTN",
+            "SHIPBER",
+            "FERRYBER"
+          ],
+          "description": "Användning av hållplatsen. BUSSTERM, TRAMSTN, METROSTN, RAILWSTN, SHIPBER eller FERRYBER"
+        },
+        "lastModifiedUtcDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2014-06-03T00:00:00.000Z",
+          "description": "Senast ändrad"
+        },
+        "existsFromDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2014-06-03T00:00:00.000Z",
+          "description": "Gäller fr.o.m. datum"
+        }
+      }
+    },
+    "HallplatserOchLinjerLineResponse": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "Innehåller statuskod för det eventuella meddelandet."
+        },
+        "message": {
+          "type": "string",
+          "description": "Innehåller eventuellt anropsrelaterade meddelanden som t.ex. felmeddelanden. Se ”Felmeddelanden” nedan."
+        },
+        "executionTime": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "Anger hur lång tid (i ms) det tog för servern att generera svaret."
+        },
+        "responseData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HallplatserOchLinjerLineResponseData"
+          }
+        }
+      }
+    },
+    "HallplatserOchLinjerLineResponseData": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-11-18 00:18",
+          "description": "Senast ändrad. Uppdateras normalt sett bara en gång per dygn"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "site",
+            "stopPoint",
+            "line",
+            "journeyPatternPointOfLine",
+            "transportMode"
+          ],
+          "example": "line",
+          "description": "Anger typen av datamodellen som svaret innehåller; Site, StopPoint, Line, JourneyPatternPointOfLine, TransportMode"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HallplatserOchLinjerLine"
+          }
+        }
+      }
+    },
+    "HallplatserOchLinjerLine": {
+      "type": "object",
+      "properties": {
+        "siteId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1002,
+          "description": "Unikt identifikationsnummer för en Site"
+        },
+        "siteName": {
+          "type": "string",
+          "example": "Centralen",
+          "description": "Benämning på området"
+        },
+        "stopAreaNumber": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1051,
+          "description": "Unikt identifikationsnummer för hållplats"
+        },
+        "lastModifiedUtcDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2014-06-27T14:03:39.103Z",
+          "description": "Senast ändrad"
+        },
+        "existsFromDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2014-06-28T00:00:00.000Z",
+          "description": "Gäller fr.o.m. datum"
+        }
+      }
+    },
+    "HallplatserOchLinjerJourneyPatternPointOnLineResponse": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "Innehåller statuskod för det eventuella meddelandet."
+        },
+        "message": {
+          "type": "string",
+          "description": "Innehåller eventuellt anropsrelaterade meddelanden som t.ex. felmeddelanden. Se ”Felmeddelanden” nedan."
+        },
+        "executionTime": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "Anger hur lång tid (i ms) det tog för servern att generera svaret."
+        },
+        "responseData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HallplatserOchLinjerJourneyPatternPointOnLineResponseData"
+          }
+        }
+      }
+    },
+    "HallplatserOchLinjerJourneyPatternPointOnLineResponseData": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-11-18 00:18",
+          "description": "Senast ändrad. Uppdateras normalt sett bara en gång per dygn"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "site",
+            "stopPoint",
+            "line",
+            "journeyPatternPointOfLine",
+            "transportMode"
+          ],
+          "example": "journeyPatternPointOfLine",
+          "description": "Anger typen av datamodellen som svaret innehåller; Site, StopPoint, Line, JourneyPatternPointOfLine, TransportMode"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HallplatserOchLinjerJourneyPatternPointOnLine"
+          }
+        }
+      }
+    },
+    "HallplatserOchLinjerJourneyPatternPointOnLine": {
+      "type": "object",
+      "properties": {
+        "siteId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1002,
+          "description": "Unikt identifikationsnummer för en Site"
+        },
+        "siteName": {
+          "type": "string",
+          "example": "Centralen",
+          "description": "Benämning på området"
+        },
+        "stopAreaNumber": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1051,
+          "description": "Unikt identifikationsnummer för hållplats"
+        },
+        "lastModifiedUtcDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2014-06-27T14:03:39.103Z",
+          "description": "Senast ändrad"
+        },
+        "existsFromDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2014-06-28T00:00:00.000Z",
+          "description": "Gäller fr.o.m. datum"
+        }
+      }
+    },
+    "HallplatserOchLinjerTransportModeResponse": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "Innehåller statuskod för det eventuella meddelandet."
+        },
+        "message": {
+          "type": "string",
+          "description": "Innehåller eventuellt anropsrelaterade meddelanden som t.ex. felmeddelanden. Se ”Felmeddelanden” nedan."
+        },
+        "executionTime": {
+          "type": "number",
+          "format": "double",
+          "example": 1,
+          "description": "Anger hur lång tid (i ms) det tog för servern att generera svaret."
+        },
+        "responseData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HallplatserOchLinjerTransportModeResponseData"
+          }
+        }
+      }
+    },
+    "HallplatserOchLinjerTransportModeResponseData": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-11-18 00:18",
+          "description": "Senast ändrad. Uppdateras normalt sett bara en gång per dygn"
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "site",
+            "stopPoint",
+            "line",
+            "journeyPatternPointOfLine",
+            "transportMode"
+          ],
+          "example": "transportMode",
+          "description": "Anger typen av datamodellen som svaret innehåller; Site, StopPoint, Line, JourneyPatternPointOfLine, TransportMode"
+        },
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HallplatserOchLinjerTransportMode"
+          }
+        }
+      }
+    },
+    "HallplatserOchLinjerTransportMode": {
+      "type": "object",
+      "properties": {
+        "defaultTransportModeCode": {
+          "type": "string",
+          "example": "BUS",
+          "enum": [
+            "BUS",
+            "METRO",
+            "TRAM",
+            "TRAIN",
+            "SHIP",
+            "FERRY"
+          ],
+          "description": "Unik kod för trafikslag"
+        },
+        "defaultTransportMode": {
+          "type": "string",
+          "example": "buss",
+          "description": "Benämning på trafikslag"
+        },
+        "stopAreaTypeCode": {
+          "type": "string",
+          "example": "BUSTERM",
+          "enum": [
+            "BUSTERM",
+            "METROSTN",
+            "TRAMSTN",
+            "RAILWSTN",
+            "SHIPBER",
+            "FERRYBER"
+          ],
+          "description": "Typkod för hållplatsen"
+        },
+        "lastModifiedUtcDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2007-08-24T00:00:00.000Z",
+          "description": "Senast ändrad"
+        },
+        "existsFromDate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2007-08-24T00:00:00.000Z",
+          "description": "Gäller fr.o.m. datum"
+        }
+      }
+    },
+    "NarliggandeHallplatserResponse": {
+      "type": "object",
+      "properties": {
+        "locationList": {
+          "$ref": "#/definitions/NarliggandeHallplatserLocationList"
+        }
+      }
+    },
+    "NarliggandeHallplatserLocationList": {
+      "type": "object",
+      "properties": {
+        "noNamespaceSchemaLocation": {
+          "type": "string",
+          "example": "hafasRestLocation.xsd",
+          "description": "Attribut refererar till en XML-schema som inte har ett namespace."
+        },
+        "stopLocation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NarliggandeHallplatserStopLocation"
+          }
+        }
+      }
+    },
+    "NarliggandeHallplatserStopLocation": {
+      "type": "object",
+      "properties": {
+        "idx": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Sorterings id. Löpnummer för sortering enligt avstånd till koordinaten. Lägst idx är närmast koordinaten."
+        },
+        "name": {
+          "type": "string",
+          "example": "Riddarhustorget (Stockholm)",
+          "description": "Namn för hållplats."
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 300101340,
+          "description": "HafasId för hållplatsen. Läs mer om HafasId i sektionen HafasId och SiteId."
+        },
+        "lat": {
+          "type": "number",
+          "format": "double",
+          "example": 59.325408,
+          "description": "Lat (WGS, decimal degree), ex 59.293611"
+        },
+        "lon": {
+          "type": "number",
+          "format": "double",
+          "example": 18.066367,
+          "description": "Long (WGS, decimal degree), ex 18.293611"
+        },
+        "dist": {
+          "type": "integer",
+          "format": "int32",
+          "example": 85,
+          "description": "Distans i meter från försedd koordinat i anropet."
+        }
+      }
+    },
+    "PlatsuppslagResponse": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "Innehåller statuskod för det eventuella meddelandet."
+        },
+        "message": {
+          "type": "string",
+          "description": "Innehåller eventuellt anropsrelaterade meddelanden som t.ex. felmeddelanden. Se ”Felmeddelanden” nedan."
+        },
+        "executionTime": {
+          "type": "number",
+          "format": "double",
+          "example": 0,
+          "description": "Anger hur lång tid (i ms) det tog för servern att generera svaret."
+        },
+        "responseData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PlatsuppslagSite"
+          }
+        }
+      }
+    },
+    "PlatsuppslagSite": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "Nordiska museet/Vasamuseet (Stockholm)",
+          "description": "Namnet på platsen."
+        },
+        "siteId": {
+          "type": "string",
+          "example": 1408,
+          "description": "Id för hållplatsområde."
+        },
+        "type": {
+          "type": "string",
+          "example": "Station",
+          "description": "Typ av plats; ”Station”, ”Address” eller ”Poi” (Point of interest).",
+          "enum": [
+            "Station",
+            "Address",
+            "Poi"
+          ]
+        },
+        "x": {
+          "type": "integer",
+          "format": "int32",
+          "example": 18095492,
+          "description": "X-koordinat för placering."
+        },
+        "y": {
+          "type": "integer",
+          "format": "int32",
+          "example": 59329282,
+          "description": "Y-koordinat för placering."
+        }
+      }
+    },
+    "RealtidsinformationResponse": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "Innehåller statuskod för det eventuella meddelandet."
+        },
+        "message": {
+          "type": "string",
+          "description": "Innehåller eventuellt anropsrelaterade meddelanden som t.ex. felmeddelanden. Se ”Felmeddelanden” nedan."
+        },
+        "executionTime": {
+          "type": "number",
+          "format": "double",
+          "example": 49,
+          "description": "Anger hur lång tid (i ms) det tog för servern att generera svaret."
+        },
+        "responseData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RealtidsinformationResponseData"
+          }
+        }
+      }
+    },
+    "RealtidsinformationResponseData": {
+      "type": "object",
+      "properties": {
+        "latestUpdate": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-12-11T15:15:42.000Z",
+          "description": "Anger när realtidsinformationen (DPS) senast uppdaterades."
+        },
+        "dataAge": {
+          "type": "integer",
+          "format": "int32",
+          "example": 33,
+          "description": "Antal sekunder sedan tidsstämpeln LatestUpdate."
+        },
+        "buses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RealtidsinformationDeparture"
+          },
+          "description": "Lista över samtliga bussavgångar för givet siteId, se svarsstruktur."
+        },
+        "metros": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RealtidsinformationDeparture"
+          },
+          "description": "Lista över samtliga tunnelbaneavgångar för givet siteId, se svarsstruktur."
+        },
+        "trains": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RealtidsinformationDeparture"
+          },
+          "description": "Lista över samtliga pendeltågsavgångar för givet siteId, se svarsstruktur."
+        },
+        "trams": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RealtidsinformationDeparture"
+          },
+          "description": "Lista över samtliga lokalbaneavgångar för givet siteId, se svarsstruktur."
+        },
+        "ships": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RealtidsinformationDeparture"
+          },
+          "description": "Lista över samtliga båtavgångar för givet siteId, se svarsstruktur."
+        },
+        "stopPointDeviations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RealtidsinformationStopPointDeviation"
+          },
+          "description": "Lista över hållplatsområdesspecifika avvikelser/störningar. D.v.s. störningar som inte är knutna till en specifik avgång."
+        }
+      }
+    },
+    "RealtidsinformationDeparture": {
+      "type": "object",
+      "properties": {
+        "transportMode": {
+          "type": "string",
+          "enum": [
+            "BUS",
+            "METRO",
+            "TRAIN",
+            "TRAM",
+            "SHIP"
+          ],
+          "example": "TRAM",
+          "description": "Trafikslag; ”BUS”,\"METRO\", ”TRAIN”, ”TRAM” eller ”SHIP”."
+        },
+        "lineNumber": {
+          "type": "string",
+          "example": 7,
+          "description": "Linjebeteckning/nummer."
+        },
+        "destination": {
+          "type": "string",
+          "example": "Norrmalmstorg",
+          "description": "Destination"
+        },
+        "journeyDirection": {
+          "type": "integer",
+          "format": "int32",
+          "example": 2,
+          "description": "Reseriktnings-id. 1 eller 2."
+        },
+        "groupOfLine": {
+          "type": "string",
+          "example": "Spårväg City",
+          "description": "För buss; Anger om det är en blå buss. Om det är en blå buss står det ”blåbuss”, annars saknas elementet(xml) eller är null(json).\n\nFör lokalbana; Linjegrupp, t.ex. “Tvärbanan” eller “Roslagsbanan”.\n\nFör tunnelbana; Linjegruppering. Röd/grön/blå linje.\n\nFör båt; Anger om det är pendlarbåt eller Waxholmsbolaget.\n"
+        },
+        "stopAreaName": {
+          "type": "integer",
+          "format": "int32",
+          "example": "Nordiska museet/Vasamuseet",
+          "description": "Hållplatsnamn."
+        },
+        "stopAreaNumber": {
+          "type": "integer",
+          "format": "int32",
+          "example": 4311,
+          "description": "Id för aktuell hållplats.\nTunnelbana före övergång; 0"
+        },
+        "stopPointNumber": {
+          "type": "integer",
+          "format": "int32",
+          "example": 4310,
+          "description": "Id för aktuellt stoppställe.\nTunnelbana före övergång; 0"
+        },
+        "stopPointDesignation": {
+          "type": "string",
+          "description": "Ytterligare identifierare för stoppställe, t.ex. bokstav för busskur eller spår för pendeltåg."
+        },
+        "timeTabledDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-12-11T15:22:31.000Z",
+          "description": "Avgångstid enligt tidtabell.\n\nTunnelbana före övergång; null\n"
+        },
+        "expectedDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-12-11T15:22:31.000Z",
+          "description": "Förväntad avgångstid. Om det finns tillhörande störning med tillräckligt hög prioritet så kan denna ha null/tomt värde. Detta fram till ett par minuter innan avgång.\n\nTunnelbana före övergång; null\n"
+        },
+        "displayTime": {
+          "type": "string",
+          "example": "6 min",
+          "description": "Avgångstid för presentation. Kan anta formaten x min, HH:mm eller Nu. Om det finns tillhörande störning med tillräckligt hög prioritet så kan denna ha värdet ”-”. Detta fram till ett par minuter innan avgång.\n\nTunnelbana före övergång:Beräknad avgång från hållplatsen, t.ex. ”2 min” eller ”Nu”.\n"
+        },
+        "journeyNumber": {
+          "type": "integer",
+          "format": "int32",
+          "example": 106,
+          "description": "Turnummer för avgången.\n\nTunnelbana före övergång; 0.\n"
+        },
+        "deviations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RealtidsinformationDeviation"
+          },
+          "description": "Innehåller typen ”Deviation” nedan. Denna kan vara tom, eller innehålla 1 till flera avvikelser.\n\nTunnelbana före övergång; Saknas.\n"
+        },
+        "secondaryDestinationName": {
+          "type": "string",
+          "description": "Finns bara för:Pendeltåg.\n\nNamn på delmål\n"
+        }
+      }
+    },
+    "RealtidsinformationStopPointDeviation": {
+      "type": "object",
+      "properties": {
+        "stopInfo": {
+          "$ref": "#/definitions/RealtidsinformationStopInfo"
+        },
+        "deviation": {
+          "$ref": "#/definitions/RealtidsinformationDeviation"
+        }
+      }
+    },
+    "RealtidsinformationDeviation": {
+      "type": "object",
+      "properties": {
+        "consequence": {
+          "type": "string",
+          "example": "INFORMATION",
+          "description": "Konsekvensbeskrivning för aktuell avvikelse."
+        },
+        "importanceLevel": {
+          "type": "integer",
+          "format": "int32",
+          "example": 2,
+          "description": "Signifikationsnivå för aktuell avvikelse. 0-9 där 9 är mest allvarlig."
+        },
+        "text": {
+          "type": "string",
+          "example": "Hållplats Norrmalmstorg tillfällig ändhållplats för spårvagnarna till och med 16 december",
+          "description": "Beskrivning av aktuell avvikelse."
+        }
+      }
+    },
+    "RealtidsinformationStopInfo": {
+      "type": "object",
+      "properties": {
+        "groupOfLine": {
+          "type": "string",
+          "example": "Tunnelbanans röda linje",
+          "description": "Om TransportMode är ”TRAM” så innehåller noden något av följande värden; ”Lidingöbanan”, ”Nockebybanan”, ”Roslagsbanan”, ”Saltsjöbanan”, ”Spårväg City”, ”Tvärbanan”. Annars blankt (kan komma att ändras)."
+        },
+        "stopAreaName": {
+          "type": "string",
+          "example": "Danderyds sjukhus",
+          "description": "Namn på hållplatsen som avvikelsen gäller."
+        },
+        "stopAreaNumber": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "Id för hållplatsen som avvikelsen gäller. Är noll om TransportMode inte är BUS."
+        },
+        "transportMode": {
+          "type": "string",
+          "example": "METRO",
+          "enum": [
+            "METRO",
+            "BUS",
+            "TRAIN",
+            "TRAM"
+          ],
+          "description": "”METRO”, ”BUS”, ”TRAIN”, ”TRAM” eller ospecificerat."
+        }
+      }
+    },
+    "ReseplanerareTripResponse": {
+      "type": "object",
+      "properties": {
+        "tripList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReseplanerareTrip"
+          }
+        }
+      }
+    },
+    "ReseplanerareTrip": {
+      "type": "object",
+      "properties": {
+        "dur": {
+          "type": "integer",
+          "format": "int32",
+          "example": 32,
+          "description": "Duration, restiden inklusive gå sträckan."
+        },
+        "chg": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Antalet byten exklusive vissa gå delresor."
+        },
+        "co2": {
+          "type": "number",
+          "format": "float",
+          "example": 0.77,
+          "description": "Co2 förbrukningen för en given resa. Om co2 förbrukningen inte går att räkna ut så returneras ”-1.0”."
+        },
+        "valid": {
+          "type": "boolean",
+          "example": false,
+          "description": "Anger om resan anses genomförbar baserat på realtidsdata som är tillgängligt. Default=true. Attributet inkluderas bara om skilt från defaultvärde."
+        },
+        "alternative": {
+          "type": "boolean",
+          "example": true,
+          "description": "Anger om resan är en alternativ resa(till en resa med valid=false) framtagen baserat på realtidsdata tillgängligt. Default=false. Attributet inkluderas bara om skilt från defaultvärde."
+        },
+        "priceInfo": {
+          "$ref": "#/definitions/ReseplanerareTripPriceInfo"
+        },
+        "legList": {
+          "$ref": "#/definitions/ReseplanerareTripLegList"
+        }
+      }
+    },
+    "ReseplanerareTripPriceInfo": {
+      "type": "object",
+      "properties": {
+        "tariffZones": {
+          "$ref": "#/definitions/ReseplanerareMessage"
+        },
+        "tariffRemark": {
+          "$ref": "#/definitions/ReseplanerareMessage"
+        },
+        "tariffMessages": {
+          "$ref": "#/definitions/ReseplanerareMessage"
+        }
+      }
+    },
+    "ReseplanerareMessage": {
+      "type": "object",
+      "properties": {
+        "$": {
+          "type": "string",
+          "example": "message",
+          "description": "Optional message"
+        }
+      }
+    },
+    "ReseplanerareTripLegList": {
+      "type": "object",
+      "properties": {
+        "Leg": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReseplanerareTripLeg"
+          }
+        }
+      }
+    },
+    "ReseplanerareTripLeg": {
+      "type": "object",
+      "properties": {
+        "idx": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "Order index"
+        },
+        "name": {
+          "type": "string",
+          "example": "tunnelbanans gröna linje 17",
+          "description": "Beskrivning av transportTyp, t.ex. ”Tunnelbanans röda linje 14.”"
+        },
+        "type": {
+          "type": "string",
+          "example": "METRO",
+          "enum": [
+            "SHIP",
+            "FERRY",
+            "TRAM",
+            "BUS",
+            "METRO",
+            "TRAIN",
+            "NARBUSS",
+            "WALK"
+          ],
+          "description": "Kan vara någon av följande;\n\nSHIP => Djurgårdsfärjan eller Waxholmsbolaget.\n\nFERRY => Pendlarbåt\n\nTRAM => Kan vara någon av; Lokalbana, Tvärbana, Roslagsbana, Saltsjöbanan, Nockebybanan och Spårvagn City.\n\nBUS => Buss, Blåbuss\n\nMETRO => Tunnelbana\n\nTRAIN => Pendeltåg\n\nNARBUSS => Närtrafikens bussar\n\nWALK => Gå\n\nÄr möjligt att någon av följande kommer med i framtiden;\n\nBIKE => Cykel\n\nCAR => Bil\n\nTAXI => Taxi\n"
+        },
+        "dist": {
+          "type": "integer",
+          "format": "int32",
+          "example": 120,
+          "description": "Antal meter att gå."
+        },
+        "dir": {
+          "type": "string",
+          "example": "Skarpnäck",
+          "description": "Om t.ex. Pendeltåg, så är det riktningen pendeltåget åker mot, t.ex. Märsta/Bålsta etc."
+        },
+        "line": {
+          "type": "string",
+          "example": 17,
+          "description": "Linjenummret, t.ex. 35."
+        },
+        "cancelled": {
+          "type": "boolean",
+          "example": true,
+          "description": "Anger om delresan är inställd. Default=false. Attributet inkluderas bara om skilt från defaultvärde."
+        },
+        "reachable": {
+          "type": "boolean",
+          "example": false,
+          "description": "Anger om delresan baserat på realtidsdata är teoretiskt nåbar. Default=true. Attributet inkluderas bara om skilt från defaultvärde."
+        },
+        "origin": {
+          "$ref": "#/definitions/ReseplanerareTripOrigin"
+        },
+        "destination": {
+          "$ref": "#/definitions/ReseplanerareTripDestination"
+        },
+        "journeyDetailRef": {
+          "$ref": "#/definitions/ReseplanerareTripRef"
+        },
+        "geometryRef": {
+          "$ref": "#/definitions/ReseplanerareTripRef"
+        },
+        "notes": {
+          "$ref": "#/definitions/ReseplanerareTripRef"
+        },
+        "RTUMessages": {
+          "$ref": "#/definitions/ReseplanerareTripRTUMessages"
+        }
+      }
+    },
+    "ReseplanerareTripRef": {
+      "type": "object",
+      "properties": {
+        "ref": {
+          "type": "string",
+          "example": "ref%3D847659%2F292235%2F987200%2F211049%2F74%26startIdx%3D3%26endIdx%3D8%26lang%3Dsv%26format%3Djson%26",
+          "description": "Reference"
+        }
+      }
+    },
+    "ReseplanerareTripOrigin": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "integer",
+          "format": "int32",
+          "example": "T-Centralen",
+          "description": "Namn på start av en delresa. T.ex. ”T-centralen”. Om detta är den första delresan i en resa samt att man i anropet använder parameter; originCoordName så påverkar man det som står i svaret. Skulle man skriva ”aaaa” istället för ”T-centralen” så skulle man få tillbaka i svaret ”aaaa” vid användandet av den parametern."
+        },
+        "type": {
+          "type": "string",
+          "example": "ST",
+          "enum": [
+            "ST",
+            "ADR"
+          ],
+          "description": "ST = Stop/Station\n\nADR = Address\n"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 400101052,
+          "description": "Id för angiven plats i delresan. Kan användas för vidare resa från den punkten."
+        },
+        "lat": {
+          "type": "number",
+          "format": "double",
+          "example": 59.331331,
+          "description": "Latitude"
+        },
+        "lon": {
+          "type": "number",
+          "format": "double",
+          "example": 18.061711,
+          "description": "Longitude"
+        },
+        "routeIdx": {
+          "type": "integer",
+          "format": "int32",
+          "example": 3,
+          "description": "Denna används i samband med JourneyDetailRef som finns i Leg objektet, för att veta från vilken del av listan som är aktuell för delresan.\n\nAnvänds tillsammans med Destination.routeIdx.\n"
+        },
+        "time": {
+          "type": "string",
+          "example": 1286,
+          "description": "Tid för delresans start"
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "example": "2016-12-12T00:00:00.000Z",
+          "description": "Datum för delresans start."
+        },
+        "track": {
+          "type": "string",
+          "example": 4,
+          "description": "Hållplatsbeteckning eller spårnummer, om information om det finns. Bussterminaler."
+        }
+      }
+    },
+    "ReseplanerareTripDestination": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "integer",
+          "format": "int32",
+          "example": "T-Centralen",
+          "description": "Namn på start av en delresa. T.ex. ”T-centralen”. Om detta är den första delresan i en resa samt att man i anropet använder parameter; originCoordName så påverkar man det som står i svaret. Skulle man skriva ”aaaa” istället för ”T-centralen” så skulle man få tillbaka i svaret ”aaaa” vid användandet av den parametern."
+        },
+        "type": {
+          "type": "string",
+          "example": "ST",
+          "enum": [
+            "ST",
+            "ADR"
+          ],
+          "description": "ST = Stop/Station\n\nADR = Address\n"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 400101052,
+          "description": "Id för angiven plats i delresan. Kan användas för vidare resa från den punkten."
+        },
+        "lat": {
+          "type": "number",
+          "format": "double",
+          "example": 59.331331,
+          "description": "Latitude"
+        },
+        "lon": {
+          "type": "number",
+          "format": "double",
+          "example": 18.061711,
+          "description": "Longitude"
+        },
+        "routeIdx": {
+          "type": "integer",
+          "format": "int32",
+          "example": 3,
+          "description": "Denna används i samband med JourneyDetailRef som finns i Leg objektet, för att veta från vilken del av listan som är aktuell för delresan.\n\nAnvänds tillsammans med Destination.routeIdx.\n"
+        },
+        "time": {
+          "type": "string",
+          "example": 1286,
+          "description": "Tid för delresans slut"
+        },
+        "date": {
+          "type": "string",
+          "format": "date",
+          "example": "2016-12-12T00:00:00.000Z",
+          "description": "Datum för delresans slut."
+        },
+        "track": {
+          "type": "string",
+          "example": 4,
+          "description": "Hållplatsbeteckning eller spårnummer, om information om det finns. Bussterminaler."
+        }
+      }
+    },
+    "ReseplanerareTripRTUMessages": {
+      "type": "object",
+      "properties": {
+        "RTUMessage": {
+          "type": "string",
+          "example": "Hissen vid uppgång Solna C på Solna station är avstängd pga underhållsarbeten.",
+          "description": "Message"
+        }
+      }
+    },
+    "ReseplanerareTripJourneyDetailResponse": {
+      "type": "object",
+      "properties": {
+        "notes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReseplanerareMessage"
+          }
+        },
+        "stops": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReseplanerareTripJourneyDetailStop"
+          }
+        },
+        "operators": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReseplanerareTripJourneyDetailOperator"
+          }
+        },
+        "directions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReseplanerareTripJourneyDetailDirection"
+          }
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReseplanerareTripJourneyDetailType"
+          }
+        },
+        "names": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReseplanerareTripJourneyDetailName"
+          }
+        },
+        "RTUMessages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReseplanerareTripJourneyDetailRTUMessage"
+          }
+        },
+        "geometryRef": {
+          "$ref": "#/definitions/ReseplanerareTripJourneyGeometryRef"
+        }
+      }
+    },
+    "ReseplanerareTripJourneyDetailStop": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Id för angiven plats i hållplatslistan. Kan användas för vidare resa från den punkten."
+        },
+        "routeIdx": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Denna används i samband med routeIdx som finns i Trip svaret i en sökning, för att veta vilken del av listan som är aktuell för resan."
+        }
+      }
+    },
+    "ReseplanerareTripJourneyDetailOperator": {
+      "type": "object",
+      "properties": {
+        "operator": {
+          "type": "string",
+          "description": "Operatörsinformation om resan."
+        }
+      }
+    },
+    "ReseplanerareTripJourneyDetailDirection": {
+      "type": "object",
+      "properties": {
+        "direction": {
+          "type": "string",
+          "description": "Riktningsinformation."
+        }
+      }
+    },
+    "ReseplanerareTripJourneyDetailType": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Typ av resa."
+        }
+      }
+    },
+    "ReseplanerareTripJourneyDetailName": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Innehåller resans namn."
+        }
+      }
+    },
+    "ReseplanerareTripJourneyDetailRTUMessage": {
+      "type": "object",
+      "properties": {
+        "RTUMessage": {
+          "type": "string",
+          "description": "Oskarpa(uncharp) realtidsmeddelande att visa"
+        }
+      }
+    },
+    "ReseplanerareTripJourneyGeometryRef": {
+      "type": "object",
+      "properties": {
+        "ref": {
+          "type": "string",
+          "example": "ref%3D847659%2F292235%2F987200%2F211049%2F74%26startIdx%3D3%26endIdx%3D8%26lang%3Dsv%26format%3Djson%26",
+          "description": "Reference"
+        }
+      }
+    },
+    "ReseplanerareTripGeometryResponse": {
+      "type": "object",
+      "properties": {
+        "geometry": {
+          "$ref": "#/definitions/ReseplanerareTripGeometry"
+        }
+      }
+    },
+    "ReseplanerareTripGeometry": {
+      "type": "object",
+      "properties": {
+        "points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReseplanerareTripGeometryPoint"
+          }
+        }
+      }
+    },
+    "ReseplanerareTripGeometryPoint": {
+      "type": "object",
+      "properties": {
+        "point": {
+          "type": "string",
+          "description": "Punkt beskriven i lat och lon."
+        }
+      }
+    },
+    "StorningsinformationResponse": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "Innehåller statuskod för det eventuella meddelandet."
+        },
+        "message": {
+          "type": "string",
+          "description": "Innehåller eventuellt anropsrelaterade meddelanden som t.ex. felmeddelanden. Se ”Felmeddelanden” nedan."
+        },
+        "executionTime": {
+          "type": "number",
+          "format": "double",
+          "example": 47,
+          "description": "Anger hur lång tid (i ms) det tog för servern att generera svaret."
+        },
+        "responseData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorningsinformationDeviations"
+          }
+        }
+      }
+    },
+    "StorningsinformationDeviations": {
+      "type": "object",
+      "properties": {
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-11-29T11:32:10.583Z",
+          "description": "När ärendet blev publicerad."
+        },
+        "mainNews": {
+          "type": "boolean",
+          "example": false,
+          "description": "Boolean som indikerar om ärendet är en huvudnyhet."
+        },
+        "sortOrder": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Förslag på sorteringsordning av ärendena."
+        },
+        "header": {
+          "type": "string",
+          "example": "Avstängda hissar vid Danderyds sjukhus",
+          "description": "Rubrik."
+        },
+        "details": {
+          "type": "string",
+          "example": "Vid Danderyds sjukhus är hissarna vid ingången närmast sjukhusets huvudentré avstängda för utbyte. Vi hänvisar till hissarna vid utgången mot bussterminalen. \\nArbetet beräknas pågå till och med 16 december.",
+          "description": "Detaljer, samma som presenteras på webbplatsen för resp. ärende."
+        },
+        "scope": {
+          "type": "string",
+          "example": "Tunnelbanans röda linje 14",
+          "description": "Ett alias för ScopeElements."
+        },
+        "devCaseGid": {
+          "type": "integer",
+          "format": "int32",
+          "example": 9076001010185232,
+          "description": "Ärendets id."
+        },
+        "devMessageVersionNumber": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Anger aktuell version för ärendet."
+        },
+        "scopeElements": {
+          "type": "string",
+          "example": "Tunnelbanans röda linje 14",
+          "description": "Beskrivning av vilka linjer eller hållplatser ärendet gäller för."
+        },
+        "fromDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-11-29T12:31:00.000Z",
+          "description": "När ärendet börjar vara aktivt."
+        },
+        "upToDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-12-23T15:30:00.000Z",
+          "description": "När ärendet slutar att vara aktivt."
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-11-29T11:32:10.583Z",
+          "description": "Senast ärendet blev uppdaterat."
+        }
+      }
+    },
+    "StorningsinformationRawResponse": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "Innehåller statuskod för det eventuella meddelandet."
+        },
+        "message": {
+          "type": "string",
+          "description": "Innehåller eventuellt anropsrelaterade meddelanden som t.ex. felmeddelanden. Se ”Felmeddelanden” nedan."
+        },
+        "executionTime": {
+          "type": "number",
+          "format": "double",
+          "example": 65,
+          "description": "Anger hur lång tid (i ms) det tog för servern att generera svaret."
+        },
+        "responseData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StorningsinformationRawDeviations"
+          }
+        }
+      }
+    },
+    "StorningsinformationRawDeviations": {
+      "type": "object",
+      "properties": {
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-11-29T11:32:10.583Z",
+          "description": "När ärendet blev publicerad."
+        },
+        "mainNews": {
+          "type": "boolean",
+          "example": false,
+          "description": "Boolean som indikerar om ärendet är en huvudnyhet."
+        },
+        "sortOrder": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Förslag på sorteringsordning av ärendena."
+        },
+        "header": {
+          "type": "string",
+          "description": "Rubrik.",
+          "example": "Avstängda hissar vid Danderyds sjukhus"
+        },
+        "details": {
+          "type": "string",
+          "example": "Vid Danderyds sjukhus är hissarna vid ingången närmast sjukhusets huvudentré avstängda för utbyte. Vi hänvisar till hissarna vid utgången mot bussterminalen. \\nArbetet beräknas pågå till och med 16 december.",
+          "description": "Detaljer, samma som presenteras på webbplatsen för resp. ärende."
+        },
+        "scope": {
+          "type": "string",
+          "example": "Tunnelbanans röda linje 14",
+          "description": "Ett alias för ScopeElements."
+        },
+        "devCaseGid": {
+          "type": "integer",
+          "format": "int32",
+          "example": 9076001010185232,
+          "description": "Ärendets id."
+        },
+        "devMessageVersionNumber": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1,
+          "description": "Anger aktuell version för ärendet."
+        },
+        "scopeElements": {
+          "type": "string",
+          "example": "Tunnelbanans röda linje 14",
+          "description": "Beskrivning av vilka linjer eller hållplatser ärendet gäller för."
+        },
+        "fromDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-11-29T12:31:00.000Z",
+          "description": "När ärendet börjar vara aktivt."
+        },
+        "upToDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-12-23T15:30:00.000Z",
+          "description": "När ärendet slutar att vara aktivt."
+        },
+        "updated": {
+          "type": "string",
+          "format": "date-time",
+          "example": "2016-11-29T11:32:10.583Z",
+          "description": "Senast ärendet blev uppdaterat."
+        },
+        "priority": {
+          "type": "integer",
+          "format": "int32",
+          "example": 35,
+          "description": "Prioriteringsordning för ärendet."
+        },
+        "lineNumber": {
+          "type": "string",
+          "example": 14,
+          "description": "Linje där ärendet är gällande."
+        },
+        "siteId": {
+          "type": "string",
+          "example": 9201,
+          "description": "Id för hållplatsområde. Kan vara tom."
+        },
+        "transportMode": {
+          "type": "string",
+          "example": "metro",
+          "enum": [
+            "metro",
+            "bus",
+            "train",
+            "tram",
+            "ship"
+          ],
+          "description": "Trafikslag för ärendet."
+        }
+      }
+    },
+    "TrafiklagetResponse": {
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "type": "integer",
+          "format": "int32",
+          "example": 0,
+          "description": "Innehåller statuskod för det eventuella meddelandet."
+        },
+        "message": {
+          "type": "string",
+          "description": "Innehåller eventuellt anropsrelaterade meddelanden som t.ex. felmeddelanden. Se ”Felmeddelanden” nedan."
+        },
+        "executionTime": {
+          "type": "number",
+          "format": "double",
+          "example": 41,
+          "description": "Anger hur lång tid (i ms) det tog för servern att generera svaret."
+        },
+        "responseData": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrafiklagetResponseData"
+          }
+        }
+      }
+    },
+    "TrafiklagetResponseData": {
+      "type": "object",
+      "properties": {
+        "trafficTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrafiklagetTrafficType"
+          }
+        }
+      }
+    },
+    "TrafiklagetTrafficType": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32",
+          "example": 2,
+          "description": "Id"
+        },
+        "name": {
+          "type": "string",
+          "example": "Tunnelbana",
+          "description": "Namn på trafikslag; \"Tunnelbana\", \"Pendeltåg\", etc."
+        },
+        "type": {
+          "type": "string",
+          "example": "metro",
+          "description": "\"metro\", \"train\", \"local\", \"tram\", \"bus\" eller \"fer\".\n\nfer = Båt\n\nlocal = Lokalbana\n\ntram = Spårvagn\n",
+          "enum": [
+            "metro",
+            "train",
+            "local",
+            "tram",
+            "bus",
+            "fer"
+          ]
+        },
+        "statusIcon": {
+          "type": "string",
+          "example": "EventGood",
+          "description": "Hjälpinformation som indikerar vilken ikon som ska visas i webben."
+        },
+        "expanded": {
+          "type": "boolean",
+          "example": true,
+          "description": "Hjälpinformation som indikerar om informationen har hög prioritet eller inte."
+        },
+        "hasPlannedEvent": {
+          "type": "boolean",
+          "example": false,
+          "description": "Hjälpinformation som indikerar om det finns planerade händelser."
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrafiklagetTrafficEvent"
+          },
+          "description": "Ett TrafficEvent objekt för varje händelse."
+        }
+      }
+    },
+    "TrafiklagetTrafficEvent": {
+      "type": "object",
+      "properties": {
+        "eventId": {
+          "type": "integer",
+          "format": "int32",
+          "example": 7281,
+          "description": "Löpnummer på händelsen."
+        },
+        "message": {
+          "type": "string",
+          "example": "Aktuella avgångar kan inte visas på stationernas skyltar pga. ett tekniskt fel. Tågen går enligt tidtabell för söndag.",
+          "description": "Meddelande gällande störningen/händelsen."
+        },
+        "expanded": {
+          "type": "boolean",
+          "example": true,
+          "description": "Hjälpinformation som indikerar om informationen har hög prioritet eller inte."
+        },
+        "planned": {
+          "type": "boolean",
+          "example": false,
+          "description": "Hjälpinformation som indikerar om händelsen är planerad eller inte."
+        },
+        "sortIndex": {
+          "type": "integer",
+          "format": "int32",
+          "example": 3,
+          "description": "Sorteringsordning på händelsen."
+        },
+        "statusIcon": {
+          "type": "string",
+          "example": "EventGood",
+          "description": "Hjälpinformation som indikerar vilken ikon som ska visas i webben."
+        },
+        "lineNumbers": {
+          "$ref": "#/definitions/TrafiklagetLineNumber"
+        },
+        "trafficLine": {
+          "type": "string",
+          "example": "Roslagsbanan",
+          "description": "Namn på den bana som händelsen påverkar. Kan saknas, om händelsen påverkar hela trafikslaget eller banor inte finns (typ bussar)."
+        },
+        "eventInfoUrl": {
+          "type": "string",
+          "description": "Länk till storningsinformation.sl.se, eller till specifik sida med information om händelsen."
+        }
+      }
+    },
+    "TrafiklagetLineNumber": {
+      "type": "object",
+      "properties": {
+        "inputDataIsOptional": {
+          "type": "boolean",
+          "example": true,
+          "description": "Är alltid satt till True och indikerar att linjenummer är frivilligt."
+        },
+        "text": {
+          "type": "string",
+          "example": "27,28,29",
+          "description": "Text"
+        }
+      }
+    }
+  }
+}
