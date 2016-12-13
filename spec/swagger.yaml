@@ -246,6 +246,300 @@ paths:
           description: Response
           schema:
             $ref: '#/definitions/RealtidsinformationResponse'
+  /TravelplannerV2/trip.json:
+    get:
+      summary: Reseplanerare 2 Trip
+      description: |
+        Med detta API kan du få reseförslag från A till B inom Stockholms län med SLs trafik. I SLs reseplanerare finns även Waxholmsbolagets trafik. APIet kan användas för att beräkna reseförslag mellan valfri kombination av position och/eller stoppställe. APIet returnerar reseförslag från ”bästa matchning” av det som läggs in.
+
+        Reseplaneraren tar emot ISO-8859-1 encodad input. Förutom rätt encoding i anropet måste strängen även url encodas. Med ISO-8859-1 teckenencoding och url encoding av tecknen så blir t.ex. ä = %E4, å =%E5, ö = %f6 och mellanslag %20.
+
+        I reseplaneraren finns det fyra olika funktioner som kan anropas
+
+        Trip;
+        Räknar ut en resa från en startpunkt till en destination. Dessa kan vara stations-id eller koordinater baserade på adresser eller ”intressepunkter.
+      parameters:
+        - name: key
+          in: query
+          description: En giltig API-nyckel.
+          required: true
+          type: string
+        - name: lang
+          in: query
+          description: Språk i svar, default sv
+          required: false
+          type: string
+          enum:
+          - sv
+          - en
+        - name: date
+          in: query
+          description: Datum. Exempel 2014-08-23. date=2014-08-23. Default idag.
+          required: false
+          type: string
+          format: date
+        - name: time
+          in: query
+          description: Tid. Exempel time=19:06. Default nu.
+          required: false
+          type: string
+        - name: searchForArrival
+          in: query
+          description: Som standard/default söker man efter tiden som man vill att resan skall avgå. Genom att sätta searchForArrival=1, så söker man istället resor baserat på tiden man vill komma fram. Default=0.
+          required: false
+          type: integer
+          format: int32
+        - name: numChg
+          in: query
+          description: Begränsa antalet byten. Default obegränsad
+          required: false
+          type: integer
+          format: int32
+        - name: minChgTime
+          in: query
+          description: Minimum bytestid
+          required: false
+          type: integer
+          format: int32
+        - name: originId
+          in: query
+          description: |
+            Kan antingen vara siteid eller ett alias, site eller akronym.
+            Exempel; 300109000, 9000, CST
+          required: false
+          type: string
+        - name: originCoordLat
+          in: query
+          description: |
+            Ett trippel-id baserat på en koordinat och ett namn för utgångspunkten för resan. Detta kommer att hanteras som en adress i resultatet.
+
+            Exempel; originCoordLat=59.347754
+          required: false
+          type: number
+          format: double
+        - name: originCoordLong
+          in: query
+          description: |
+            Ett trippel-id baserat på en koordinat och ett namn för utgångspunkten för resan. Detta kommer att hanteras som en adress i resultatet.
+
+            Exempel; originCoordLong=17.883724
+          required: false
+          type: number
+          format: double
+        - name: originCoordName
+          in: query
+          description: |
+            Ett trippel-id baserat på en koordinat och ett namn för utgångspunkten för resan. Detta kommer att hanteras som en adress i resultatet.
+
+            Exempel; originCoordName=Blackebergsplan
+          required: false
+          type: string
+        - name: destId
+          in: query
+          description: Kan antingen vara ett site-id, eller ett alias, site eller akronym.
+          required: false
+          type: string
+        - name: destCoordLat
+          in: query
+          description: |
+            Ett trippel-id baserat på en koordinat och ett namn för utgångspunkten för resan. Detta kommer att hanteras som en adress i resultatet.
+
+            Exempel; destCoordLat=59.347754
+          required: false
+          type: number
+          format: double
+        - name: destCoordLong
+          in: query
+          description: |
+            Ett trippel-id baserat på en koordinat och ett namn för utgångspunkten för resan. Detta kommer att hanteras som en adress i resultatet.
+
+            Exempel; destCoordLong=17.883724
+          required: false
+          type: number
+          format: double
+        - name: destCoordName
+          in: query
+          description: |
+            Ett trippel-id baserat på en koordinat och ett namn för utgångspunkten för resan. Detta kommer att hanteras som en adress i resultatet.
+
+            Exempel; destCoordName=Blackebergsplan
+          required: false
+          type: string
+        - name: viaId
+          in: query
+          description: d för via-stop (siteId). Exempel; 300109600, 9600
+          required: false
+          type: string
+        - name: viaStopOver
+          in: query
+          description: Tid för via stop. Default=0 betyder att resan kommer att passera via-stoppet.
+          required: false
+          type: integer
+          format: int32
+        - name: unsharp
+          in: query
+          description: Med unsharp=1 kommer svaret innehålla resor från alternative stop-platser i närheten. Default=0
+          required: false
+          type: integer
+          format: int32
+        - name: searchFirstLastTrip
+          in: query
+          description: Leta efter den första eller sista resan för dagen. Notera att det här gäller en tidtabellsdag som kan sträcka sig över midnatt.
+          required: false
+          type: string
+          enum:
+          - first
+          - last
+        - name: maxWalkDist
+          in: query
+          description: Max gångavstånd (meter) får gång till stop-platser.
+          required: false
+          type: integer
+          format: int32
+        - name: useTrain
+          in: query
+          description: Stäng av trafiktyper som är tillgängliga som default. (0/1) Exempel; useTrain=0.
+          required: false
+          type: integer
+          format: int32
+        - name: useMetro
+          in: query
+          description: Stäng av trafiktyper som är tillgängliga som default. (0/1) Exempel; useMetro=0.
+          required: false
+          type: integer
+          format: int32
+        - name: useTram
+          in: query
+          description: Stäng av trafiktyper som är tillgängliga som default. (0/1) Exempel; useTram=0.
+          required: false
+          type: integer
+          format: int32
+        - name: useBus
+          in: query
+          description: Stäng av trafiktyper som är tillgängliga som default. (0/1) Exempel; useBus=0.
+          required: false
+          type: integer
+          format: int32
+        - name: useFerry
+          in: query
+          description: Stäng av trafiktyper som är tillgängliga som default. (0/1) Exempel; useFerry=0.
+          required: false
+          type: integer
+          format: int32
+        - name: useShip
+          in: query
+          description: Stäng av trafiktyper som är tillgängliga som default. (0/1) Exempel; useShip=0.
+          required: false
+          type: integer
+          format: int32
+        - name: lineInc
+          in: query
+          description: Inkludera endast dessa linjer I sökning, suffixlinjer stöds inte. Exempel; lineInc=4,1,38
+          required: false
+          type: integer
+          format: int32
+        - name: lineExc
+          in: query
+          description: Exkludera dessa linjer i sökningen. Suffixlinjer stöds inte. Exempel; lineExc=4,1,38
+          required: false
+          type: integer
+          format: int32
+        - name: numTrips
+          in: query
+          description: Begränsa antalet returnerade resor. Notera att det här är ett ungefärligt tal. (1-6) Default=5
+          required: false
+          type: integer
+          format: int32
+        - name: encoding
+          in: query
+          description: Default är ISO-8859-1. Encoding påverkar svaret och det man skickar in i originCoordName och destCoordName.
+          required: false
+          type: string
+          enum:
+          - ISO-8859-1
+          - UTF-8
+        - name: realtime
+          in: query
+          description: Om det finns realtidsdata och flaggan realtime=true är satt så får man ut extra information i svaret. T.ex. för tider så är det rtTime och rtDate som läggs till. Default=false.
+          required: false
+          type: boolean
+      tags:
+        - Reseplanerare
+      responses:
+        200:
+          description: Response
+          schema:
+            $ref: '#/definitions/ReseplanerareTripResponse'
+  /TravelplannerV2/journeydetail.json:
+    get:
+      summary: Reseplanerare 2 Journey Detail
+      description: |
+        Med detta API kan du få reseförslag från A till B inom Stockholms län med SLs trafik. I SLs reseplanerare finns även Waxholmsbolagets trafik. APIet kan användas för att beräkna reseförslag mellan valfri kombination av position och/eller stoppställe. APIet returnerar reseförslag från ”bästa matchning” av det som läggs in.
+
+        Reseplaneraren tar emot ISO-8859-1 encodad input. Förutom rätt encoding i anropet måste strängen även url encodas. Med ISO-8859-1 teckenencoding och url encoding av tecknen så blir t.ex. ä = %E4, å =%E5, ö = %f6 och mellanslag %20.
+
+        I reseplaneraren finns det fyra olika funktioner som kan anropas
+
+        JourneyDetail;
+        Returnerar detaljerad information om en del av en resa med ett fordon.
+        Den returnerar en lista på alla stop/stationer inklusive alla ankomst- och avgångstider med realtidsdata(om det finns tillgängligt).
+
+        NOTE; due to lacking documentation this operation may not be mapped as expected
+      parameters:
+        - name: key
+          in: query
+          description: En giltig API-nyckel.
+          required: true
+          type: string
+        - name: ref
+          in: query
+          description: Referensparameter erhållen från tidigare trip-sökning
+          required: true
+          type: string
+        - name: realtime
+          in: query
+          description: Om det finns realtidsdata och flaggan realtime=true är satt så får man ut extra information i svaret. Det som läggs till om det finns realtid är rtArrTime, rtArrDate, rtDepTime och rtDepTime. Default=false.
+          required: false
+          type: boolean
+      tags:
+        - Reseplanerare
+      responses:
+        200:
+          description: Response
+          schema:
+            $ref: '#/definitions/ReseplanerareTripJourneyDetailResponse'
+  /TravelplannerV2/geometry.json:
+    get:
+      summary: Reseplanerare 2 Geometry
+      description: |
+        Med detta API kan du få reseförslag från A till B inom Stockholms län med SLs trafik. I SLs reseplanerare finns även Waxholmsbolagets trafik. APIet kan användas för att beräkna reseförslag mellan valfri kombination av position och/eller stoppställe. APIet returnerar reseförslag från ”bästa matchning” av det som läggs in.
+
+        Reseplaneraren tar emot ISO-8859-1 encodad input. Förutom rätt encoding i anropet måste strängen även url encodas. Med ISO-8859-1 teckenencoding och url encoding av tecknen så blir t.ex. ä = %E4, å =%E5, ö = %f6 och mellanslag %20.
+
+        I reseplaneraren finns det fyra olika funktioner som kan anropas
+
+        Geometry;
+        Returnerar en linje med WGS84 koordinater som kan användas för att rita ut en resa på en karta.
+
+        NOTE; due to lacking documentation this operation may not be mapped as expected
+      parameters:
+        - name: key
+          in: query
+          description: En giltig API-nyckel.
+          required: true
+          type: string
+        - name: ref
+          in: query
+          description: Referensparameter erhållen från tidigare trip-sökning
+          required: true
+          type: string
+      tags:
+        - Reseplanerare
+      responses:
+        200:
+          description: Response
+          schema:
+            $ref: '#/definitions/ReseplanerareTripGeometryResponse'
   /deviations.json:
     get:
       summary: Störningsinformation 2
@@ -1064,6 +1358,395 @@ definitions:
         - TRAIN
         - TRAM
         description: ”METRO”, ”BUS”, ”TRAIN”, ”TRAM” eller ospecificerat.
+  ReseplanerareTripResponse:
+    type: object
+    properties:
+      tripList:
+        type: array
+        items:
+          $ref: '#/definitions/ReseplanerareTrip'
+  ReseplanerareTrip:
+    type: object
+    properties:
+      dur:
+        type: integer
+        format: int32
+        example: 32
+        description: Duration, restiden inklusive gå sträckan.
+      chg:
+        type: integer
+        format: int32
+        example: 1
+        description: Antalet byten exklusive vissa gå delresor.
+      co2:
+        type: number
+        format: float
+        example: 0.77
+        description: Co2 förbrukningen för en given resa. Om co2 förbrukningen inte går att räkna ut så returneras ”-1.0”.
+      valid:
+        type: boolean
+        example: false
+        description: Anger om resan anses genomförbar baserat på realtidsdata som är tillgängligt. Default=true. Attributet inkluderas bara om skilt från defaultvärde.
+      alternative:
+        type: boolean
+        example: true
+        description: Anger om resan är en alternativ resa(till en resa med valid=false) framtagen baserat på realtidsdata tillgängligt. Default=false. Attributet inkluderas bara om skilt från defaultvärde.
+      priceInfo:
+        $ref: '#/definitions/ReseplanerareTripPriceInfo'
+        description: Trip related price information.
+      legList:
+        $ref: '#/definitions/ReseplanerareTripLegList'
+        description: Lista av Leg-objekt
+  ReseplanerareTripPriceInfo:
+    type: object
+    properties:
+      tariffZones:
+        $ref: '#/definitions/ReseplanerareMessage'
+        description: Tariff zoner.
+      tariffRemark:
+        $ref: '#/definitions/ReseplanerareMessage'
+        description: Tariff beskrivning.
+      tariffMessages:
+        $ref: '#/definitions/ReseplanerareMessage'
+        description: Innehåller en lista av tariff-relaterad information som kan visas tillsammans med prisinformationen.
+  ReseplanerareMessage:
+    type: object
+    properties:
+      $:
+        type: string
+        example: message
+        description: Optional message
+  ReseplanerareTripLegList:
+    type: object
+    properties:
+      Leg:
+        type: array
+        items:
+          $ref: '#/definitions/ReseplanerareTripLeg'
+  ReseplanerareTripLeg:
+    type: object
+    properties:
+      idx:
+        type: integer
+        format: int32
+        example: 0
+        description: Order index
+      name:
+        type: string
+        example: tunnelbanans gröna linje 17
+        description: Beskrivning av transportTyp, t.ex. ”Tunnelbanans röda linje 14.”
+      type:
+        type: string
+        example: METRO
+        enum:
+        - SHIP
+        - FERRY
+        - TRAM
+        - BUS
+        - METRO
+        - TRAIN
+        - NARBUSS
+        - WALK
+        description: |
+          Kan vara någon av följande;
+
+          SHIP => Djurgårdsfärjan eller Waxholmsbolaget.
+
+          FERRY => Pendlarbåt
+
+          TRAM => Kan vara någon av; Lokalbana, Tvärbana, Roslagsbana, Saltsjöbanan, Nockebybanan och Spårvagn City.
+
+          BUS => Buss, Blåbuss
+
+          METRO => Tunnelbana
+
+          TRAIN => Pendeltåg
+
+          NARBUSS => Närtrafikens bussar
+
+          WALK => Gå
+
+          Är möjligt att någon av följande kommer med i framtiden;
+
+          BIKE => Cykel
+
+          CAR => Bil
+
+          TAXI => Taxi
+      dist:
+        type: integer
+        format: int32
+        example: 120
+        description: Antal meter att gå.
+      dir:
+        type: string
+        example: Skarpnäck
+        description: Om t.ex. Pendeltåg, så är det riktningen pendeltåget åker mot, t.ex. Märsta/Bålsta etc.
+      line:
+        type: string
+        example: 17
+        description: Linjenummret, t.ex. 35.
+      cancelled:
+        type: boolean
+        example: true
+        description: Anger om delresan är inställd. Default=false. Attributet inkluderas bara om skilt från defaultvärde.
+      reachable:
+        type: boolean
+        example: false
+        description: Anger om delresan baserat på realtidsdata är teoretiskt nåbar. Default=true. Attributet inkluderas bara om skilt från defaultvärde.
+      origin:
+        $ref: '#/definitions/ReseplanerareTripOrigin'
+        description: Origin innehåller information om vart en delresa startar.
+      destination:
+        $ref: '#/definitions/ReseplanerareTripDestination'
+        description: Destination innehåller information om vart en delresa slutar.
+      journeyDetailRef:
+        $ref: '#/definitions/ReseplanerareTripRef'
+        description: Destination innehåller information om vart en delresa slutar.
+      geometryRef:
+        $ref: '#/definitions/ReseplanerareTripRef'
+        description: Destination innehåller information om vart en delresa slutar.
+      notes:
+        $ref: '#/definitions/ReseplanerareTripRef'
+        description: Innehåller en en lista med element av typen Note för detta Leg-objekt.
+      RTUMessages:
+        $ref: '#/definitions/ReseplanerareTripRTUMessages'
+        description: Innehåller en lista på oskarpa(unsharp) realtidsmeddelanden som gäller för detta Leg-objekt.
+  ReseplanerareTripRef:
+    type: object
+    properties:
+      ref:
+        type: string
+        example: ref%3D847659%2F292235%2F987200%2F211049%2F74%26startIdx%3D3%26endIdx%3D8%26lang%3Dsv%26format%3Djson%26
+        description: Reference
+  ReseplanerareTripOrigin:
+    type: object
+    properties:
+      name:
+        type: integer
+        format: int32
+        example: T-Centralen
+        description: Namn på start av en delresa. T.ex. ”T-centralen”. Om detta är den första delresan i en resa samt att man i anropet använder parameter; originCoordName så påverkar man det som står i svaret. Skulle man skriva ”aaaa” istället för ”T-centralen” så skulle man få tillbaka i svaret ”aaaa” vid användandet av den parametern.
+      type:
+        type: string
+        example: ST
+        enum:
+        - ST
+        - ADR
+        description: |
+          ST = Stop/Station
+
+          ADR = Address
+      id:
+        type: integer
+        format: int32
+        example: 400101052
+        description: Id för angiven plats i delresan. Kan användas för vidare resa från den punkten.
+      lat:
+        type: number
+        format: double
+        example: 59.331331
+        description: Latitude
+      lon:
+        type: number
+        format: double
+        example: 18.061711
+        description: Longitude
+      routeIdx:
+        type: integer
+        format: int32
+        example: 3
+        description: |
+          Denna används i samband med JourneyDetailRef som finns i Leg objektet, för att veta från vilken del av listan som är aktuell för delresan.
+
+          Används tillsammans med Destination.routeIdx.
+      time:
+        type: string
+        example: 21:26
+        description: Tid för delresans start
+      date:
+        type: string
+        format: date
+        example: 2016-12-12
+        description: Datum för delresans start.
+      track:
+        type: string
+        example: 4
+        description: Hållplatsbeteckning eller spårnummer, om information om det finns. Bussterminaler.
+  ReseplanerareTripDestination:
+    type: object
+    properties:
+      name:
+        type: integer
+        format: int32
+        example: T-Centralen
+        description: Namn på start av en delresa. T.ex. ”T-centralen”. Om detta är den första delresan i en resa samt att man i anropet använder parameter; originCoordName så påverkar man det som står i svaret. Skulle man skriva ”aaaa” istället för ”T-centralen” så skulle man få tillbaka i svaret ”aaaa” vid användandet av den parametern.
+      type:
+        type: string
+        example: ST
+        enum:
+        - ST
+        - ADR
+        description: |
+          ST = Stop/Station
+
+          ADR = Address
+      id:
+        type: integer
+        format: int32
+        example: 400101052
+        description: Id för angiven plats i delresan. Kan användas för vidare resa från den punkten.
+      lat:
+        type: number
+        format: double
+        example: 59.331331
+        description: Latitude
+      lon:
+        type: number
+        format: double
+        example: 18.061711
+        description: Longitude
+      routeIdx:
+        type: integer
+        format: int32
+        example: 3
+        description: |
+          Denna används i samband med JourneyDetailRef som finns i Leg objektet, för att veta från vilken del av listan som är aktuell för delresan.
+
+          Används tillsammans med Destination.routeIdx.
+      time:
+        type: string
+        example: 21:26
+        description: Tid för delresans slut
+      date:
+        type: string
+        format: date
+        example: 2016-12-12
+        description: Datum för delresans slut.
+      track:
+        type: string
+        example: 4
+        description: Hållplatsbeteckning eller spårnummer, om information om det finns. Bussterminaler.
+  ReseplanerareTripNotes:
+    type: object
+    properties:
+      note:
+        type: array
+        items:
+          $ref: '#/definitions/ReseplanerareTripRef'
+  ReseplanerareTripRTUMessages:
+    type: object
+    properties:
+      RTUMessage:
+        type: string
+        example: Hissen vid uppgång Solna C på Solna station är avstängd pga underhållsarbeten.
+        description: Message
+  ReseplanerareTripJourneyDetailResponse:
+    type: object
+    properties:
+      notes:
+        type: array
+        items:
+          $ref: '#/definitions/ReseplanerareMessage'
+      stops:
+        type: array
+        items:
+          $ref: '#/definitions/ReseplanerareTripJourneyDetailStop'
+      operators:
+        type: array
+        items:
+          $ref: '#/definitions/ReseplanerareTripJourneyDetailOperator'
+      directions:
+        type: array
+        items:
+          $ref: '#/definitions/ReseplanerareTripJourneyDetailDirection'
+      types:
+        type: array
+        items:
+          $ref: '#/definitions/ReseplanerareTripJourneyDetailType'
+      names:
+        type: array
+        items:
+          $ref: '#/definitions/ReseplanerareTripJourneyDetailName'
+      RTUMessages:
+        type: array
+        items:
+          $ref: '#/definitions/ReseplanerareTripJourneyDetailRTUMessage'
+      RTUMessages:
+        $ref: '#/definitions/ReseplanerareTripJourneyGeometryRef'
+  ReseplanerareTripJourneyDetailStop:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: Id för angiven plats i hållplatslistan. Kan användas för vidare resa från den punkten.
+      routeIdx:
+        type: integer
+        format: int32
+        description: Denna används i samband med routeIdx som finns i Trip svaret i en sökning, för att veta vilken del av listan som är aktuell för resan.
+  ReseplanerareTripJourneyDetailOperator:
+    type: object
+    properties:
+      operator:
+        type: string
+        description: Operatörsinformation om resan.
+  ReseplanerareTripJourneyDetailDirection:
+    type: object
+    properties:
+      direction:
+        type: string
+        description: Riktningsinformation.
+  ReseplanerareTripJourneyDetailType:
+    type: object
+    properties:
+      type:
+        type: string
+        description: Typ av resa.
+  ReseplanerareTripJourneyDetailName:
+    type: object
+    properties:
+      name:
+        type: string
+        description: Innehåller resans namn.
+  ReseplanerareTripJourneyDetailRTUMessage:
+    type: object
+    properties:
+      RTUMessage:
+        type: string
+        description: Oskarpa(uncharp) realtidsmeddelande att visa
+  ReseplanerareTripJourneyGeometryRef:
+    type: object
+    properties:
+      ref:
+        type: string
+        example: ref%3D847659%2F292235%2F987200%2F211049%2F74%26startIdx%3D3%26endIdx%3D8%26lang%3Dsv%26format%3Djson%26
+        description: Reference
+  ReseplanerareTripJourneyDetailNotes:
+    type: object
+    properties:
+      points:
+        type: array
+        items:
+          $ref: '#/definitions/ReseplanerareTripGeometryPoint'    
+  ReseplanerareTripGeometryResponse:
+    type: object
+    properties:
+      geometry:
+        $ref: '#/definitions/ReseplanerareTripGeometry'
+  ReseplanerareTripGeometry:
+    type: object
+    properties:
+      points:
+        type: array
+        items:
+          $ref: '#/definitions/ReseplanerareTripGeometryPoint'
+  ReseplanerareTripGeometryPoint:
+    type: object
+    properties:
+      point:
+        type: string
+        description: Punkt beskriven i lat och lon.
   StorningsinformationResponse:
     type: object
     properties:
